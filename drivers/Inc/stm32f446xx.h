@@ -99,7 +99,7 @@ typedef struct
     volatile uint32_t BSRR;             /* GPIO port bit set/reset register                         Address offset: 0x18 */
     volatile uint32_t LCKR;             /* GPIO port configuration lock register                    Address offset: 0x1C */
     volatile uint32_t AFR[2];           /* GPIO alternate function low and high register    AFR[0]:Low      AFR[1]:High     Address offset: AFR[0]: 0x20 AFR[1]: 0x24 */
-}GPIO_RefDef_t;
+}GPIO_RegDef_t;
 
 typedef struct 
 {
@@ -146,14 +146,14 @@ typedef struct
  * Peripheral definitions (Peripheral base addresses typecasted to _RegDef_t)
  */
 
-#define GPIOA       ((GPIO_RefDef_t*)GPIOA_BASEADDR)            /* GPIO-A Peripheral definition */
-#define GPIOB       ((GPIO_RefDef_t*)GPIOB_BASEADDR)            /* GPIO-B Peripheral definition */
-#define GPIOC       ((GPIO_RefDef_t*)GPIOC_BASEADDR)            /* GPIO-C Peripheral definition */
-#define GPIOD       ((GPIO_RefDef_t*)GPIOD_BASEADDR)            /* GPIO-D Peripheral definition */
-#define GPIOE       ((GPIO_RefDef_t*)GPIOE_BASEADDR)            /* GPIO-E Peripheral definition */
-#define GPIOF       ((GPIO_RefDef_t*)GPIOF_BASEADDR)            /* GPIO-F Peripheral definition */
-#define GPIOG       ((GPIO_RefDef_t*)GPIOG_BASEADDR)            /* GPIO-G Peripheral definition */
-#define GPIOH       ((GPIO_RefDef_t*)GPIOH_BASEADDR)            /* GPIO-H Peripheral definition */
+#define GPIOA       ((GPIO_RegDef_t*)GPIOA_BASEADDR)            /* GPIO-A Peripheral definition */
+#define GPIOB       ((GPIO_RegDef_t*)GPIOB_BASEADDR)            /* GPIO-B Peripheral definition */
+#define GPIOC       ((GPIO_RegDef_t*)GPIOC_BASEADDR)            /* GPIO-C Peripheral definition */
+#define GPIOD       ((GPIO_RegDef_t*)GPIOD_BASEADDR)            /* GPIO-D Peripheral definition */
+#define GPIOE       ((GPIO_RegDef_t*)GPIOE_BASEADDR)            /* GPIO-E Peripheral definition */
+#define GPIOF       ((GPIO_RegDef_t*)GPIOF_BASEADDR)            /* GPIO-F Peripheral definition */
+#define GPIOG       ((GPIO_RegDef_t*)GPIOG_BASEADDR)            /* GPIO-G Peripheral definition */
+#define GPIOH       ((GPIO_RegDef_t*)GPIOH_BASEADDR)            /* GPIO-H Peripheral definition */
 
 #define RCC         ((RCC_RefDef_t*)RCC_BASEADDR)               /* Reset and Clock Control peripheral definition */
 
