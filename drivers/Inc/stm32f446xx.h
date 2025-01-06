@@ -252,4 +252,13 @@ typedef struct
 
 #define SYSCFG_PCLK_DI()        (RCC -> APB2ENR &= ~(1<<14))     /* System configuration controller clock Disable */
 
+
+// Some generic macros
+#define ENABLE          1
+#define DISABLE         0
+#define SET             ENABLE
+#define RESET           DISABLE
+#define GPIO_PIN_SET    SET
+#define GPIO_PIN_RESET  RESET
+
 #endif /* INC_STM32F446XX_H_ */
