@@ -121,6 +121,7 @@ void GPIO_Init(GPIO_HANDLE_t *pGPIOHandle)
     {
         // Non interrupt mode
         temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+        pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
         pGPIOHandle->pGPIOx->MODER |= temp;
     }
     else
@@ -131,20 +132,34 @@ void GPIO_Init(GPIO_HANDLE_t *pGPIOHandle)
     
     // Configure the speed
     temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->OSPEEDER &= ~(0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
     pGPIOHandle->pGPIOx->OSPEEDER |= temp;
     temp = 0;
 
     // Configure the PUPD Control
-    (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->PUPDR &= ~(0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
     pGPIOHandle->pGPIOx->PUPDR |= temp;
+    temp = 0;
 
     // Configure the Output type
-    (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
     pGPIOHandle->pGPIOx->OTYPER |= temp;
     temp = 0;
 
-    // Configure the alt functionality
-    
+    // Configure the alternate functionality
+    if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN)
+    {
+        // Configure Alternate function Registers
+        uint32_t temp1, temp2;
+
+        temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 8;
+        temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 8;
+        pGPIOHandle->pGPIOx->AFR[temp1] &= (0xF << (4 * temp2) );
+        pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * temp2) );
+    }
+
 }
 
 /*********************************************************************
