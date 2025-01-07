@@ -114,7 +114,37 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  *********************************************************************/
 void GPIO_Init(GPIO_HANDLE_t *pGPIOHandle)
 {
+    uint32_t temp = 0;          // Temporaury register
 
+    // Configure the model of GPIO Pin
+    if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
+    {
+        // Non interrupt mode
+        temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+        pGPIOHandle->pGPIOx->MODER |= temp;
+    }
+    else
+    {
+        // The code will be updated later (Interrupt Mode)
+    }
+    temp = 0;
+    
+    // Configure the speed
+    temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->OSPEEDER |= temp;
+    temp = 0;
+
+    // Configure the PUPD Control
+    (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->PUPDR |= temp;
+
+    // Configure the Output type
+    (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+    pGPIOHandle->pGPIOx->OTYPER |= temp;
+    temp = 0;
+
+    // Configure the alt functionality
+    
 }
 
 /*********************************************************************

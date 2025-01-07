@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "stm32f446xx_gpio_driver.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
