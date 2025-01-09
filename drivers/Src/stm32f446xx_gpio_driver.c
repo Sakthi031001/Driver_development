@@ -29,35 +29,35 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
     {
         if(pGPIOx == GPIOA)
         {
-            GPIOA_PCLK_EN();
+            GPIOA_REG_RESET();
         }
         else if (pGPIOx == GPIOB)
         {
-            GPIOB_PCLK_EN();
+            GPIOB_REG_RESET();
         }
         else if (pGPIOx == GPIOC)
         {
-            GPIOC_PCLK_EN();
+            GPIOC_REG_RESET();
         }
         else if (pGPIOx == GPIOD)
         {
-            GPIOD_PCLK_EN();
+            GPIOD_REG_RESET();
         }
         else if (pGPIOx == GPIOE)
         {
-            GPIOE_PCLK_EN();
+            GPIOE_REG_RESET();
         }
         else if (pGPIOx == GPIOF)
         {
-            GPIOF_PCLK_EN();
+            GPIOF_REG_RESET();
         }
         else if (pGPIOx == GPIOG)
         {
-            GPIOG_PCLK_EN();
+            GPIOG_REG_RESET();
         }
         else if (pGPIOx == GPIOH)
         {
-            GPIOH_PCLK_EN();
+            GPIOH_REG_RESET();
         }
     }
     else
@@ -106,7 +106,7 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  *  
  *  brief               -   This function Initializes the GPIO Port
  * 
- *  parameter [in]      -   Pointer to the handlestructure
+ *  parameter [in]      -   Pointer to the handle structure
  * 
  *  return              -   none
  * 
@@ -114,7 +114,7 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  *********************************************************************/
 void GPIO_Init(GPIO_HANDLE_t *pGPIOHandle)
 {
-    uint32_t temp = 0;          // Temporaury register
+    uint32_t temp = 0;          // Temporary register
 
     // Configure the model of GPIO Pin
     if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
@@ -175,7 +175,38 @@ void GPIO_Init(GPIO_HANDLE_t *pGPIOHandle)
  *********************************************************************/
 void GPIO_Deinit(GPIO_RegDef_t *pGPIOx)
 {
-
+    if(pGPIOx == GPIOA)
+    {
+        GPIOA_REG_RESET();
+    }
+    else if (pGPIOx == GPIOB)
+    {
+        GPIOB_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOC)
+    {
+        GPIOC_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOD)
+    {
+        GPIOD_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOE)
+    {
+        GPIOE_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOF)
+    {
+        GPIOF_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOG)
+    {
+        GPIOG_PCLK_EN();
+    }
+    else if (pGPIOx == GPIOH)
+    {
+        GPIOH_PCLK_EN();
+    }
 }
 
 /*
